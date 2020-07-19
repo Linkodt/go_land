@@ -1,0 +1,122 @@
+package main
+
+import (
+	"fmt"
+)
+
+type HeroNode struct {
+	no int
+	name string
+	nickname string
+	next *HeroNode // 下一个结点
+}
+
+// 给链表插入结点
+// 编写第一种插入方法，在单链表的最后加入。
+func InsertHeroNode(head *HeroNode,newHeroNode *HeroNode){
+	// 思路
+	// 1. 先找到该链表的最后这个结点
+	// 2. 创建一个辅助结点[跑龙套,帮忙]
+	temp := head
+	for{
+		if temp.next == nil{
+			break
+		}
+		temp = temp.next // 不断指向下一节点
+	}
+	// 讲newheronode加到链表的最后
+	temp.next = newHeroNode
+}
+
+func ListHeroNode(head *HeroNode){
+	temp:=head
+	// 判断是不是空链表
+	if temp.next == nil{
+		fmt.Println("空链表")
+		return 
+	}
+	// 遍历
+	for{
+		fmt.Printf("[%d , %s , %s]==>",temp.next.no, temp.next.name,temp.next.nickname)
+		temp = temp.next
+		if temp.next == nil {
+			return 
+		}
+	}
+}
+
+// 边写第2种插入方法，根据no的编号从小到大插入..
+func InsertHeroNode_orderby(head *HeroNode,newHeroNode *HeroNode){
+	// 思路
+	// 1. 先找到该链表的最后这个结点
+	// 2. 创建一个辅助结点[跑龙套,帮忙]
+	temp := head
+	flag := true
+	// 让插入的no与temp的下一个结点的no比较
+	for{
+		if temp.next==nil{
+			break
+		}else if temp.next.no>newHeroNode.no{
+			//说明newHeroNode 就应该插入到temp后面
+			break
+		}else if temp.next.no == newHeroNode.no{
+			fmt.Println("已有相同编号的结点，禁止加入")
+			flag = false
+			break
+		}
+		temp = temp.next
+	}
+	if !flag{
+		return 
+	}else{
+		newHeroNode.next = temp.next
+		temp.next = newHeroNode
+	}
+}
+
+// dele
+func DelHerNode(head *HeroNode,id int){
+	temp := head
+	flag := false
+	// 找到要删除的结点
+	for{
+		if temp.next==nil{
+			break
+		}else if temp.next.no ==id{
+			fmt.Println("已有相同编号的结点，禁止加入")
+			flag = true
+			break
+		}
+		temp = temp.next
+	}
+
+	// 找到后删除
+	if flag{
+		temp.next = temp.next.next
+	}else{
+		fmt.Println("false")
+	}
+}
+
+func main() {
+	// 1.创建一个头结点
+	head := &HeroNode{
+
+	}
+	// 2.创建一个新的结点
+	hero1 := &HeroNode{
+		no:1,
+		name:"宋江",
+		nickname:"及时雨",
+	}
+	hero2 := &HeroNode{
+		no:2,
+		name:"卢俊义",
+		nickname:"玉麒麟",
+	}
+
+	InsertHeroNode(head, hero1)
+	InsertHeroNode(head,hero2)
+	ListHeroNode(head)
+
+}

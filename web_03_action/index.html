@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>indexIf</title>
+</head>
+<body>
+	{{if .}}
+		我要显示出来
+		{{end}}
+		<hr/>
+		{{if .}}
+		如果传过来的是true将显示
+		{{else}}
+		else中的内容被现实
+		{{end}}
+
+	{{range .}}
+		内容:{{.}}
+	{{else}}
+		无任何元素
+	{{end}}
+
+	{{with "太子"}}
+		修改之后的数据:{{.}}
+	{{end}}
+
+
+</body>
+</html>
