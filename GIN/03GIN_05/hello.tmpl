@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+    <title>
+        Hello
+    </title>
+</head>
+<body>
+{{/*这个是注释*/}}
+{{ $v1 := .u1.Id}}
+{{/*上面是定义变量*/}}
+
+<p>Hello {{.u1.Id}}</p>
+<p>Hello {{.u1.Name}}</p>
+<p>Hello {{.m1.age}}</p>
+<hr>
+{{if $v1}}
+<p>if true:{{$v1}}</p>
+{{else}}
+<p>if false</p>
+{{end}}
+</body>
+</html>
